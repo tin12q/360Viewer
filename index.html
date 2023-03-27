@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>360 Panorama with Navigation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <style>
+      #navbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+      }
+      #viewer {
+        position: relative;
+        z-index: 0;
+      }
+      /* Dark mode styles */
+      body.dark-mode {
+        background-color: #212529;
+        color: #fff;
+      }
+      body.dark-mode #navbar {
+        background-color: #343a40;
+      }
+      body.dark-mode .nav-link {
+        color: #fff;
+      }
+      body.dark-mode .navbar-toggler-icon {
+        background-color: #fff;
+      }
+      .dark-mode .navbar {
+        background-color: #333;
+        color: #fff;
+      }
+
+      .dark-mode .navbar-toggler {
+        color: #fff;
+        border-color: #fff;
+      }
+
+      .dark-mode .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1.0)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      }
+
+      .dark-mode .nav-link {
+        color: #fff;
+      }
+
+      .dark-mode .active {
+        background-color: #444;
+      }
+    </style>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">360 Panorama</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="mydropdown"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Scenes
+            </a>
+            <div class="dropdown-menu" aria-labelledby="mydropdown">
+              <a class="dropdown-item" href="#" onclick="changeScene('scene1')"
+                >Scene 1</a
+              >
+              <a class="dropdown-item" href="#" onclick="changeScene('scene2')"
+                >Scene 2</a
+              >
+              <a class="dropdown-item" href="#" onclick="changeScene('scene3')"
+                >Scene 3</a
+              >
+            </div>
+          </li>
+
+        </ul>
+        
+        </div>
+      </div>
+    </nav>
+    <div id="viewer">
+      <a-scene id="myScene">
+        <a-assets>
+          <img id="scene1" src="360.jpg" />
+          <img id="scene2" src="3602.jpg" />
+          <img id="scene3" src="3603.jpg" />
+        </a-assets>
+        <a-sky id="panorama" src="#scene1"></a-sky>
+      </a-scene>
+    </div>
+    <script>
+      function changeScene(scene) {
+        document.querySelector("#panorama").setAttribute("src", "#" + scene);
+      }
+
+      const body = document.body;
+      const darkModeToggle = document.getElementById("dark-mode-toggle");
+
+      darkModeToggle.addEventListener("click", function () {
+        body.classList.add("dark-mode");
+      });
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      navLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+          body.classList.add("dark-mode");
+        });
+      });
+    </script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
